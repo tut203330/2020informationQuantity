@@ -28,7 +28,7 @@ public interface InformationEstimatorInterface{
 }                        
 */
 
-
+//わかりなかったので，そのままpushしています
 public class TestCase {
     public static void main(String[] args) {
 	int c;
