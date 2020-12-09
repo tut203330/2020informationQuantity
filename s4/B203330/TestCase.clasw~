@@ -1,0 +1,211 @@
+package s4.B203330; // s4.Bnnnnnn¿¿¿¿¿¿¿¿¿¿nnnnnn¿¿¿ID¿¿¿
+import java.lang.*;
+import s4.specification.*;
+
+
+interface FrequencerInterface {     ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    void setTarget(byte[]  target); // ¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    void setSpace(byte[]  space);  // ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    int frequency(); //TARGET¿¿¿¿¿¿¿¿¿¿¿TARGET¿¿¿¿¿¿¿¿¿¿-1¿¿¿¿¿¿
+                    //¿¿¿¿¿¿¿¿SPACE¿¿¿¿¿¿¿¿¿¿¿Space¿¿¿¿¿¿¿¿¿¿0¿¿¿¿¿¿
+                    //¿¿¿¿¿¿¿¿¿SPACE¿TARGET¿¿¿¿¿¿¿¿¿
+    int subByteFrequency(int start, int end);
+    // ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿target [start]¿target [start + 1]¿...¿target [end-1]¿¿¿
+    // START¿¿¿END¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+}
+
+/*
+package s4.specification;
+public interface InformationEstimatorInterface{
+    void setTarget(byte target[]); // ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    void setSpace(byte space[]); // ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    double estimation(); // ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿0.0¿¿¿¿¿¿
+// ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿Double.MAX_VALUE¿¿¿¿¿¿
+// ¿¿¿¿¿¿¿¿Double.MAX_VALUE¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+// ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿ ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+// ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+}
+*/
+
+public class Frequencer implements FrequencerInterface {
+    // ¿¿¿¿¿¿¿¿¿*¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿*
+    byte[] myTarget;
+    byte[] mySpace;
+
+    @Override
+    public void setTarget(byte[] target) {
+        myTarget = target;
+    }
+    @Override
+    public void setSpace(byte[] space) {
+        mySpace = space;
+    }
+
+    @Override
+    public int frequency() {
+        int targetLength = myTarget.length;
+        int spaceLength = mySpace.length;
+        int count = 0;
+	//¿¿¿¿¿¿¿¿¿
+
+        for(int start = 0; start<spaceLength; start++) { // ¿¿¿¿¿¿¿
+            boolean abort = false;
+            for(int i = 0; i<targetLength; i++) {
+                if(myTarget[i] != mySpace[start+i]) { abort = true; break; }
+            }
+            if(abort == false) { count++; }//¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+        }
+        return count;
+    }
+
+    // ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    @Override
+    public int subByteFrequency(int start, int length) {
+        // ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+        return -1;
+    }
+}
+
+public class TestCase{
+	public void case1(void) {
+		Frequencer myObject;
+        	int freq;
+        	try {
+            		System.out.println("checking my Frequencer");
+            		myObject = new Frequencer();
+            		myObject.setSpace("Hi Ho Hi Ho".getBytes());
+            		freq = myObject.frequency();
+            		System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+            		if(-1 == freq) { System.out.println("OK"); } 
+			else {System.out.println("The processing when TARGET is invalid of FREPis not described."); }
+        	}
+        		catch(Exception e) {
+            		System.out.println("Exception occurred: STOP");
+        	}
+
+	}//target=Non space = True
+
+	public void case2(void) {
+		Frequencer myObject;
+        	int freq;
+        	try {
+            		System.out.println("checking my Frequencer");
+            		myObject = new Frequencer();
+			myObject.setTarget("H".getBytes());
+            		freq = myObject.frequency();
+            		System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+            		if(0 == freq) { System.out.println("OK"); } 
+			else {System.out.println("The processing when SPACE is invalid  of FREP is not described"); }
+        	}
+        		catch(Exception e) {
+            		System.out.println("Exception occurred: STOP");
+        	}
+
+	}//target=True space = Non
+
+	public void case3(void) {
+		Frequencer myObject;
+        	int freq;
+        	try {
+            		System.out.println("checking my Frequencer");
+            		myObject = new Frequencer();
+			myObject.setSpace("Hi Ho Hi Ho".getBytes());
+			myObject.setTarget("H".getBytes());
+            		freq = myObject.frequency();
+            		System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+            		if(4 == freq) { System.out.println("OK"); } 
+			else {System.out.println("The processing  when the argument of FREP is correct is not described"); }
+        	}
+        		catch(Exception e) {
+            		System.out.println("Exception occurred: STOP");
+        	}
+
+
+	}//target=True space = True
+
+	public void case4(void) {
+		Frequencer myObject;
+        	int subB;
+		int start;
+		int end;
+        	try {
+            		System.out.println("checking my Frequencer");
+            		myObject = new Frequencer();
+			myObject.setSpace("Hi Ho Hi Ho".getBytes());
+			myObject.setTarget("H".getBytes());
+			start = 0;
+			end = -1;
+
+			subB = myObject.subByteFrequency()
+			System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+subB+" times. ");
+            		if(-1 == subB) { System.out.println("OK"); } 
+			else {System.out.println("The processing when END is invalid  of subBy is not described"); }
+        	}
+        		catch(Exception e) {
+            		System.out.println("Exception occurred: STOP");
+        	}
+		
+
+	}//start=True end = False
+	
+	public void case5(void) {
+		Frequencer myObject;
+        	int subB;
+		int start;
+		int end;
+        	try {
+            		System.out.println("checking my Frequencer");
+            		myObject = new Frequencer();
+			myObject.setSpace("Hi Ho Hi Ho".getBytes());
+			myObject.setTarget("H".getBytes());
+			start = -1;
+			end = ("Hi Ho Hi Ho".getBytes()).length;
+
+			subB = myObject.subByteFrequency()
+			System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+subB+" times. ");
+            		if(-1 == subB) { System.out.println("OK"); } 
+			else {System.out.println("The processing when START is invalid  of subBy is not described"); }
+        	}
+        		catch(Exception e) {
+            		System.out.println("Exception occurred: STOP");
+        	}
+
+	}//start=False end = True
+
+	public void case5(void) {
+		Frequencer myObject;
+        	int subB;
+		int start;
+		int end;
+        	try {
+            		System.out.println("checking my Frequencer");
+            		myObject = new Frequencer();
+			myObject.setSpace("Hi Ho Hi Ho".getBytes());
+			myObject.setTarget("H".getBytes());
+			start = 0;
+			end = ("Hi Ho Hi Ho".getBytes()).length;
+
+			subB = myObject.subByteFrequency()
+			System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+subB+" times. ");
+            		if(4 == subB) { System.out.println("OK"); } 
+			else {System.out.println("The processing  when the argument of subBy is correct is not described"); }
+        	}
+        		catch(Exception e) {
+            		System.out.println("Exception occurred: STOP");
+        	}
+
+	}//start=True end = True
+	
+    public static void main(String[] args) {
+        TestCase test;
+
+	test.case1();
+	test.case2();
+	test.case3();
+	test.case4();
+	test.case5();
+	test.case6();
+        
+
+}
+
