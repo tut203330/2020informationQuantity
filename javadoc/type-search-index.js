@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"s4.specification","l":"FrequencerInterface"},{"p":"s4.specification","l":"InformationEstimatorInterface"}]
