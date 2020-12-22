@@ -48,6 +48,7 @@ public class Frequencer implements FrequencerInterface{
                     System.out.write(mySpace[j]);
                 }
                 System.out.write('\n');
+		//System.out.println(mySpace[mySpace.length-1]);
             }
         }
     }
@@ -75,38 +76,31 @@ public class Frequencer implements FrequencerInterface{
        	//	
 	//System.out.println(mySpace[i]+":"+mySpace[j]);  
 	
-	if(mySpace[i] > mySpace[j])
+	//System.out.println(i+":"+j+":"+k+":"+mySpace.length); 
+	while(mySpace[i] == mySpace[j]){
+		 i++;
+		 j++;
+	 	//System.out.println(mySpace[i]+":"+mySpace[j]);
+       		if(i== mySpace.length || j == mySpace.length){
+			if(i>j)
+				return 1;
+			else if(i<j)
+				return -1;
+			
+			else
+				return 0;
+		}		
+	}
+
+ 	if(mySpace[i] > mySpace[j])
 		return 1;
+
 	else if(mySpace[i] < mySpace[j])
 		return -1;
-	else{	
-		int k = (i>j) ? i:j;
-		i++;
-		j++;
-		//System.out.println(i+":"+j+":"+k+":"+mySpace.length); 
-		if(j<=mySpace.length-1){
-			for(int l=i;l<=k;l++){
-				 //System.out.println(l);
-				if(mySpace[i] > mySpace[j]){
-					//System.out.println("01\n"); 
-					return 1;
-				}
-		        	else if(mySpace[i] < mySpace[j]){
-			        	//System.out.println("0-1\n"); 
-					return -1; 
-				}
-			}
-		}
-		// System.out.println(mySpace[i]+":"+mySpace[j]);
-		if(i<j){
-			//System.out.println("11\n");
-			return 1;
-		}
-		else{
-			//System.out.println("1-1\n"); 
-			return -1;
-		}	
-	} 
+
+	else
+		return 0;
+
 	    //return 0; // この行は変更しなければいけない。 
     }
 
