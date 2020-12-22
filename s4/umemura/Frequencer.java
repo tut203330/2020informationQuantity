@@ -71,8 +71,9 @@ public class Frequencer implements FrequencerInterface{
         // if suffix_i = suffix_j, it returns 0;   
 
         // ここにコードを記述せよ 
-        //                                          
-        return 0; // この行は変更しなければいけない。 
+       	//                                          
+       
+	    return 0; // この行は変更しなければいけない。 
     }
 
     public void setSpace(byte []space) { 
@@ -83,8 +84,8 @@ public class Frequencer implements FrequencerInterface{
         // put all suffixes in suffixArray.
         for(int i = 0; i< space.length; i++) {
             suffixArray[i] = i; // Please note that each suffix is expressed by one integer.      
-        }
-        //                                            
+       	}
+       	//                                            
         // ここに、int suffixArrayをソートするコードを書け。
         // もし、mySpace が"ABC"ならば、
         // suffixArray = { 0, 1, 2} となること求められる。
