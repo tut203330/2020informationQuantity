@@ -8,7 +8,7 @@ all:
 run:
 	java -classpath "../.." s4.B203330/Hello
 	java -classpath "../.." s4.B203330/Frequencer
-#	java -classpath "../.." s4.B203330/InformationEstimator
+	java -classpath "../.." s4.B203330/InformationEstimator
 #	java -classpath "../.." s4.B203330/TestCase
 
 # runやrunHelloなどがファイル名ではなくターゲット名であることをmakeに伝えるための定義
