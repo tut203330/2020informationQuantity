@@ -34,7 +34,7 @@ public class InformationEstimator implements InformationEstimatorInterface {
     double iq(int start,int end) {
 	myFrequencer.setTarget(subBytes(myTarget,start,end));
 	int F=myFrequencer.frequency();
-
+	//System.out.println("/"+start+"/"+end+"/"+F);
         return  - Math.log10((double) F / (double) mySpace.length)/ Math.log10((double) 2.0);
     }
 
