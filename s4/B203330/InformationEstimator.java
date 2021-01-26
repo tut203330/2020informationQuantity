@@ -47,7 +47,7 @@ public class InformationEstimator implements InformationEstimatorInterface {
 		for(int i=1;i<myTarget.length;i++){
 			double res = iq(0,i+1);
 			for(int j=0;j<i;j++){
-				if(res>Est_res[i]+iq(j+1,i+1))
+				if(res>Est_res[j]+iq(j+1,i+1))
 					res=Est_res[j]+iq(j+1,i+1);
 			}
 			Est_res[i]=res;
@@ -63,14 +63,14 @@ public class InformationEstimator implements InformationEstimatorInterface {
 
     @Override
     public double estimation(){
-	boolean partition = Double.isInfinite(Est_res[myTarget.length-1]);
+	
         if(myTarget.length == 0 || myTarget == null) 
 		return 0.0;
 
-	else if(partition||mySpace == null)
+	else if(Double.isInfinite(Est_res[myTarget.length-1])||mySpace == null)
 		return Double.MAX_VALUE;
-	else
-		return Est_res[myTarget.length-1];
+	
+	return Est_res[myTarget.length-1];
 		
     }
 
